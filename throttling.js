@@ -26,7 +26,22 @@ const throttle = (func, limit) => {
     }
 }
 
-const throttleFn = throttle(punch, 300)
+// const throttlePractice = (fn, delay) => {
+//     let isTh;
+//     return function () {
+//         let context = this,
+//             args = arguments
+//         if (!isTh) {
+//             fn.apply(context, args)
+//             isTh = true
+//             setTimeout(() => {
+//                 isTh = false
+//             }, delay);
+//         }
+//     }
+// }
+
+const throttleFn = throttlePractice(punch, 300)
 
 throttleFn()
 throttleFn()

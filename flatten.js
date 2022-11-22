@@ -1,6 +1,22 @@
 // case one flatten an array
 const numArr = [1, [2, [3], 4, [5, 6, [7]]]];
 
+let resultArray = []
+
+function flattenArray(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            flattenArray(arr[i])
+        } else {
+            resultArray.push(arr[i])
+        }
+    }
+    return resultArray
+}
+
+// console.log("flattenArr", flattenArray(numArr))
+
+
 //in built
 function flatten(arr) {
     return arr.flat(Infinity)
@@ -25,7 +41,7 @@ function flattenRecursive(arr) {
 
 // console.log(flattenRecursive(numArr))
 
-//without recursion
+//without reduce
 
 const flatenArr = []
 function flatten2(arr) {
@@ -55,6 +71,22 @@ var user = {
     }
 };
 
+let resultObject = {}
+
+function falttenObj(obj, parentKey) {
+    Object.keys(obj).forEach((keys) => {
+        let prefix = `${parentKey}_${keys}`
+        if (typeof obj[keys] === 'object') {
+            falttenObj(obj[keys], prefix)
+        } else {
+            Object.assign(resultObject, { ...resultObject, [prefix]: obj[keys] })
+        }
+    })
+    return resultObject
+}
+
+console.log("falttenObj", falttenObj(user, 'user'))
+
 // output
 // {
 //     user_name: "Vishal",
@@ -68,10 +100,8 @@ const flattenObject = {}
 function falttenObjFn(userObj, parentKey) {
     Object.keys(userObj).forEach((key) => {
         let prefix = `${parentKey}_${key}`
-        // console.log(prefix)
-        if (typeof userObj[key] == 'object') {
-            console.log(key)
-            falttenObjFn(userObj[key], prefix)
+        if (typeof userObj[key] === "object") {
+            return falttenObjFn(userObj[key], prefix)
         } else {
             Object.assign(flattenObject, { ...flattenObject, [prefix]: userObj[key] })
         }
@@ -79,4 +109,4 @@ function falttenObjFn(userObj, parentKey) {
     return flattenObject
 }
 
-// console.log(falttenObjFn(user, 'user'))
+console.log(falttenObjFn(user, 'user'))

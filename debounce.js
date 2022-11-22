@@ -21,7 +21,19 @@ const debounce = function (fn, delay) {
     }
 }
 
-const betterFunction = debounce(getData, 300);
+// const debouncePractice = (fn, delay) => {
+//     let timer
+//     return function () {
+//         let context = this,
+//             args = arguments
+//         clearTimeout(timer)
+//         setTimeout(() => {
+//             fn.apply(context, args)
+//         }, delay);
+//     }
+// }
+
+const betterFunction = debouncePractice(getData, 300);
 
 betterFunction()
 betterFunction()

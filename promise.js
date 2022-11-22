@@ -86,3 +86,52 @@ function resolveAll() {
 }
 
 resolveAll()
+
+// promise.allSettled
+
+const ApiCall1 = new Promise((resolved, rejected) => {
+    setTimeout(() => {
+        resolved("yesss 1")
+    }, 4000);
+    // rejected("rejected")
+})
+
+const ApiCall2 = new Promise((resolved, rejected) => {
+    try {
+        // setTimeout(() => {
+        //   resolved("yesss 2")
+        // }, 3000);
+        setTimeout(() => {
+            rejected("rejected")
+        }, 3000);
+    } catch {
+
+    }
+})
+
+Promise.allSettled([ApiCall1, ApiCall2]).then((value) => {
+    console.log("result", value)
+}).catch((err) => {
+    console.log("err", err)
+})
+
+new Promise(function (resolve, reject) {
+
+    setTimeout(() => resolve(1), 1000); // (*)
+
+}).then(function (result) { // (**)
+
+    alert(result); // 1
+    return result * 2;
+
+}).then(function (result) { // (***)
+
+    alert(result); // 2
+    return result * 2;
+
+}).then(function (result) {
+
+    alert(result); // 4
+    return result * 2;
+
+});

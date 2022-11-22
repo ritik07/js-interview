@@ -1,0 +1,21 @@
+type Creator {
+  id: ID!
+  name: String
+  subscribers: Number
+  videos: [Videos]
+}
+
+type Videos{
+  url: String!
+  creator: Creator 
+}
+
+type Query {
+  videos: [Videos]
+  creator(id String!): Creator
+}
+
+type Mutation {
+  createVideo(url: String): Videos
+  deleteVideo(url: String): Videos
+}
